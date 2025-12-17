@@ -25,19 +25,20 @@ function updateUI() {
   }
 }
 
-async function copyToClipboard(text, btnElement) {
+async function copyToClipboard(text, btnElement, sourceElement) {
   try {
     await navigator.clipboard.writeText(text);
     showFeedback(btnElement, 'コピーしました！');
   } catch (err) {
     console.error('Failed to copy:', err);
-    // Fallback?
-    showFeedback(btnElement, 'エラー: ⌘Cでコピーしてください');
-    // Select the text
+    // Fallback: Select the text for manual copy
     const selection = window.getSelection();
     const range = document.createRange();
-    // Assuming we want to select the display element closest to the button
-    // But for now just feedback is enough
+    range.selectNodeContents(sourceElement);
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    showFeedback(btnElement, '選択しました: ⌘Cでコピー');
   }
 }
 
@@ -58,12 +59,12 @@ function showFeedback(btn, message) {
 
 copyNameBtn.addEventListener('click', () => {
   const text = folderDisplay.textContent;
-  if (text) copyToClipboard(text, copyNameBtn);
+  if (text) copyToClipboard(text, copyNameBtn, folderDisplay);
 });
 
 copyCommandBtn.addEventListener('click', () => {
   const text = commandDisplay.textContent;
-  if (text) copyToClipboard(text, copyCommandBtn);
+  if (text) copyToClipboard(text, copyCommandBtn, commandDisplay);
 });
 
 // Set default date to today
