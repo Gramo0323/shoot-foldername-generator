@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shoot Foldername Generator</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app">
+      <main class="container">
+        <header>
+          <h1>Shoot Foldername Generator</h1>
+          <p>撮影データのフォルダ名を生成します</p>
+        </header>
+
+        <div class="card">
+          <div class="input-group">
+            <label for="date-input">日付</label>
+            <input type="date" id="date-input" required />
+          </div>
+
+          <div class="input-group">
+            <label for="identifier-select">同日識別子</label>
+            <select id="identifier-select">
+              <option value="">なし</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="name-input">お客様名</label>
+            <input type="text" id="name-input" placeholder="田中 玲美" autocomplete="off" />
+            <small class="hint">空白は自動除去・末尾「様」自動付与</small>
+          </div>
+        </div>
+
+        <div class="card result-card" id="result-section" hidden>
+          <div class="result-group">
+            <label>生成されたフォルダ名</label>
+            <div class="output-display" id="folder-name-display"></div>
+            <button id="copy-name-btn" class="btn primary">
+              <span>コピー</span>
+            </button>
+          </div>
+
+          <div class="result-group mt-4">
+            <label>コマンド (Mac用)</label>
+            <div class="code-display">
+              <code id="command-display"></code>
+            </div>
+            <button id="copy-command-btn" class="btn secondary btn-sm">
+              コマンドをコピー
+            </button>
+          </div>
+        </div>
+      </main>
+      <footer>
+        &copy; 2025 Shoot Foldername Generator
+      </footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
